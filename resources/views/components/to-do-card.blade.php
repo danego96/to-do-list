@@ -4,9 +4,10 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <form id="todo-form">
+                    <form id="todo-form" method="POST" action="{{route('task.store')}}">
+                        @csrf
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control"
+                            <input type="text" name="name" class="form-control"
                                    id="todo-input"
                                    placeholder="Add new task"
                                 required>
@@ -16,7 +17,9 @@
                         </div>
                     </form>
                     <ul class="list-group" id="todo-list">
-
+@foreach ( $tasks as $task)
+    {{$task -> name}}
+@endforeach
                     </ul>
                 </div>
             </div>
