@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('/tasks', [TaskController::class, 'store'])->name('task.store');
+Route::put('/tasks/{task}', [TaskController::class, 'update'])->name('task.update');
 Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('task.destroy');
 
 require __DIR__.'/auth.php';
