@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\TaskRequest;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
@@ -29,15 +32,11 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TaskRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
-
-        $request->user()->tasks()->create([
-            'name' => $request->name,
-        ]);
+        /** @var \App\Models\User $user **/
+        $user = Auth::user();
+        $user->tasks()->create($request->validated());
 
         return redirect()->route('dashboard');
     }
@@ -61,10 +60,9 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Task $task)
+    public function update(TaskRequest $request, Task $task)
     {
-        $task->name = $request->input('name');
-        $task->update();
+        $task->update($request->validated());
 
         return redirect()->route('dashboard');
     }
