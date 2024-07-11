@@ -25,4 +25,11 @@ class TaskRequest extends FormRequest
             'name' => 'required|string|max:255',
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'task',
+        ];
+    }
 }

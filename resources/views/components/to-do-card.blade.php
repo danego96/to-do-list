@@ -10,9 +10,12 @@
                                 <div class="card-body">
                                     <form id="todo-form" method="POST" action="{{ route('task.store') }}">
                                         @csrf
+                                        @error('name')
+                                        <div class="text-red-600">{{$message}}</div>
+                                        @enderror
                                         <div class="input-group mb-3">
                                             <input type="text" name="name" class="form-control"
-                                                id="todo-input" placeholder="Add new task" required>
+                                                id="todo-input" placeholder="Add new task">
                                             <button class="btn btn-primary" type="submit">
                                                 Add
                                             </button>
