@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Task;
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Requests\TaskRequest;
+use App\Models\Task;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
-    
     /**
      * Display a listing of the resource.
      */
@@ -34,7 +32,7 @@ class TaskController extends Controller
      */
     public function store(TaskRequest $request)
     {
-        /** @var \App\Models\User $user **/
+        /** @var \App\Models\User $user * */
         $user = Auth::user();
         $user->tasks()->create($request->validated());
 
